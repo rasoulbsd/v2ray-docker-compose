@@ -14,9 +14,10 @@ config = json.load(file)
 
 # LOAD DOCKER-COMPOSE FILE
 
-docker_compose_file = open(str(path.joinpath('../docs/docker-compose-ptunnel-upstream-sample.yml')), 'r', encoding='utf-8')
+docker_compose_file = open(str(Path(__file__).parent.joinpath('../docs/docker-compose-ptunnel-upstream-sample.yml')), 'r', encoding='utf-8')
 
 # INPUT: PTUNNEl
+
 ptunnel_pass = None
 ptunnel_verification = input("Do you want to use PTunnel? (y/n): ")
 if ptunnel_verification.lower() == 'y' or ptunnel_verification.lower() == 'yes':
@@ -29,6 +30,7 @@ elif ptunnel_verification.lower() != 'n' and ptunnel_verification.lower() != 'no
     exit(1)
 
 # INPUT: UPSTREAM UUID
+
 defaultUUID = config['inbounds'][0]['settings']['clients'][0]['id']
 if defaultUUID == '<UPSTREAM-UUID>':
     message = "Upstream UUID: (Leave empty to generate a random one)\n"
@@ -45,6 +47,7 @@ if upstreamUUID == '':
 config['inbounds'][0]['settings']['clients'][0]['id'] = upstreamUUID
 
 # SAVE CONFIG FILE
+
 content = json.dumps(config, indent=2)
 open(str(path), 'w', encoding='utf-8').write(content)
 
