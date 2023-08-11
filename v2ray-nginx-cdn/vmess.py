@@ -4,7 +4,8 @@ import base64
 import yaml
 import json
 from pathlib import Path
-import urllib.request
+import random
+import ipaddress
 
 def config_generator(domain, uuid, ip=""):
     if ip == "":
@@ -30,8 +31,11 @@ isUsingCloudFlareCDNProxy = 'no'
 
 isUsingCloudFlareCDNProxy = input("Are you using CloudFlare CDN Proxy? type 'yes' or 'no'. Default is no.\n")
 if isUsingCloudFlareCDNProxy == 'yes':
-    enhancedIPList = []
     for line in open(str(path.joinpath('cloudflare_ip_list.txt')), 'r'):
-        print(config_generator(domain, uuid, line + "\n"))
+        tempIpList = []
+        for tempIP in ipaddress.IPv4Network(str(line).strip()):
+            tempIpList.append(tempIP)
+        finalIP = str(random.choice(tempIpList)).strip()
+        print(config_generator(domain, uuid, finalIP)+ "\n")
 else:
     print(config_generator(domain, uuid))
