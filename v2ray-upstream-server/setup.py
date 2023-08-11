@@ -19,7 +19,7 @@ docker_compose_file = open(str(Path(__file__).parent.joinpath('../docs/docker-co
 # INPUT: PTUNNEl
 
 ptunnel_pass = None
-ptunnel_verification = input("Do you want to use PTunnel? (y/n): ")
+ptunnel_verification = input("Do you want to use PTunnel? (y/n): \n")
 if ptunnel_verification.lower() == 'y' or ptunnel_verification.lower() == 'yes':
     ptunnel_pass = input('Password for ptunnel: (Leave empty to generate a random one)\nDo not include "(" or ")" in password\n')
     if(ptunnel_pass == ''):
