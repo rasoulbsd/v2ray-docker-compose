@@ -2,7 +2,7 @@ version: "3"
 
 services:
   v2ray:
-    image: ghcr.io/getimages/v2fly-core:v4.45.2
+    image: ghcr.io/v2fly/v2ray:v5.14.1-64-std
     restart: always
     environment:
       - v2ray.vmess.aead.forced=false
@@ -13,7 +13,7 @@ services:
       - "127.0.0.1:1310:1310"
       - "127.0.0.1:1310:1310/udp"
   caddy:
-    image: ghcr.io/getimages/caddy:2.6.2-alpine
+    image: caddy:2.7.6-alpine
     restart: always
     ports:
       - "80:80"

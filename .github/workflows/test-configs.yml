@@ -12,14 +12,14 @@ jobs:
       matrix:
         configs: [
           "v2ray-docker-client",
-          "v2ray-bridge-server",
+          "v2ray-relay-server",
           "v2ray-upstream-server",
           "v2ray-caddy-cdn",
           "v2ray-nginx-cdn"
         ]
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 16
       - name: check json configs format

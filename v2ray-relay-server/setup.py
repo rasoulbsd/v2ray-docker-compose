@@ -67,17 +67,17 @@ for i, inbound in enumerate(config['inbounds']):
         if defaultUUID == '<BRIDGE-UUID>':
             message = "Bridge UUID: (Leave empty to generate a random one)\n"
         else:
-            message = f"Bridge UUID: (Leave empty to use `{defaultUUID}`)\n"
+            message = f"Relay UUID: (Leave empty to use `{defaultUUID}`)\n"
 
-        bridgeUUID = input(message)
-        if bridgeUUID == "":
+        relayUUID = input(message)
+        if relayUUID == "":
             if defaultUUID == '<BRIDGE-UUID>':
                 bridgeUUID = str(uuid.uuid4())
                 print(bridgeUUID)
             else:
-                bridgeUUID = defaultUUID
+                relayUUID = defaultUUID
 
-        config['inbounds'][i]['settings']['clients'][0]['id'] = bridgeUUID
+        config['inbounds'][i]['settings']['clients'][0]['id'] = relayUUID
 
     if inbound['protocol'] == 'shadowsocks':
         defaultPassword = inbound['settings']['password']
@@ -86,15 +86,15 @@ for i, inbound in enumerate(config['inbounds']):
         else:
             message = f"Shadowsocks Password: (Leave empty to use `{defaultPassword}`)\n"
 
-        bridgePassword = input(message)
-        if bridgePassword == "":
+        relayPassword = input(message)
+        if relayPassword == "":
             if defaultPassword == '<SHADOWSOCKS-PASSWORD>':
                 bridgePassword = secrets.token_urlsafe(16)
                 print(bridgePassword)
             else:
-                bridgePassword = defaultPassword
+                relayPassword = defaultPassword
 
-        config['inbounds'][i]['settings']['password'] = bridgePassword
+        config['inbounds'][i]['settings']['password'] = relayPassword
 
 # SAVE CONFIG FILE
 
