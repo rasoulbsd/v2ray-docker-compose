@@ -1,17 +1,17 @@
 # HTTP & SOCKS Protocols
 
-The HTTP and SOCKS (SOCKS5) proxy protocols are appropriate for internal usage on the bridge server and port forwarding.
+The HTTP and SOCKS (SOCKS5) proxy protocols are appropriate for internal usage on the relay server and port forwarding.
 They would be exposed to the 127.0.0.1 IP address without passwords.
 
-## On the bridge server
+## On the relay server
 
-The command below shows how to use the HTTP proxy on the bridge server.
+The command below shows how to use the HTTP proxy on the relay server.
 
 ```shell
 export {http,https}_proxy="http://127.0.0.1:1110"
 export {HTTP,HTTPS}_PROXY="http://127.0.0.1:1110"
 
-# This "curl" should return the upstream IP (not bridge!)
+# This "curl" should return the upstream IP (not relay!)
 curl ifconfig.io
 
 # The "sudo" command needs the -E parameter to use HTTP/SOCKS proxy and other envs

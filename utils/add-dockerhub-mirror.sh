@@ -5,7 +5,7 @@ DOCKER_DAEMON_FILE="/etc/docker/daemon.json"
 
 # Docs: https://mirror.iranserver.com/docker/
 
-echo -e "Use this script only in iran bridge servers.\n"
+echo -e "Use this script only in iran relay servers.\n"
 read -p "Continue (y/n)?" choice
 case "$choice" in 
   y|Y ) echo -e "Updating your Docker registry to docker.iranserver.com mrirror ...\n" ;;

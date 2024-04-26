@@ -2,7 +2,7 @@ version: "3"
 
 services:
   v2ray:
-    image: ghcr.io/getimages/v2fly-core:v4.45.2
+    image: ghcr.io/v2fly/v2ray:v5.14.1-64-std
     restart: always
     environment:
       - v2ray.vmess.aead.forced=false
