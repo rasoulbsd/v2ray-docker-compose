@@ -2,6 +2,9 @@
 
 This repository contains V2Ray-based solutions for bypassing firewalls in highly restricted networks where direct access to upstream servers (servers with free internet access) is unavailable.
 
+## Installing Docker
+curl -fsSL https://get.docker.com | sh
+
 ## Table of contents
 
   * [Server Solutions](#server-solutions)
