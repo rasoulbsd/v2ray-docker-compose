@@ -26,4 +26,4 @@ Using V2Ray on a single server might not always be efficient,
 especially in networks with more restrictions where protocols like Shadowsocks directly may not work as expected.
 To set up V2Ray effectively in such environments, check the main documentation in this repository for advanced solutions:
 
-[https://github.com/miladrahimi/v2ray-docker-compose](..)
+[https://github.com/miladrahimi/v2ray-docker-compose](../README.md)
