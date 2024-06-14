@@ -5,7 +5,7 @@ This repository contains V2Ray-based solutions for bypassing firewalls in restri
 ## Table of contents
 
   * [Server Solutions](#server-solutions)
-    * [V2Ray Upsream and Relay Servers](#v2ray-upsream-and-relay-servers)
+    * [V2Ray Upsream and Relay Servers](#v2ray-upstream-and-relay-servers)
     * [V2Ray Behind CDN](#v2ray-behind-cdn)
     * [V2Ray as Relay for Outline](#v2ray-as-relay-for-outline)
   * [Client Applications](#client-applications)
@@ -16,7 +16,7 @@ This repository contains V2Ray-based solutions for bypassing firewalls in restri
 
 ## Server Solutions
 
-### V2Ray Upsream and Relay Servers
+### V2Ray Upstream and Relay Servers
 
 The "V2Ray Upsream and Relay Servers" solution offers **high stability and speed** (depends on the network speeds of the relay and upstream servers).
 
