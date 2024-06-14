@@ -18,7 +18,7 @@ This repository contains V2Ray-based solutions for bypassing firewalls in restri
 
 ### V2Ray Upstream and Relay Servers
 
-The "V2Ray Upsream and Relay Servers" solution offers **high stability and speed** (depends on the network speeds of the relay and upstream servers).
+The "V2Ray Upstream and Relay Servers" solution offers **high stability and speed** (depends on the network speeds of the relay and upstream servers).
 
 The solution uses V2Ray on the upstream server, using the Shadowsocks protocol for communication with the relay server.
 The relay server provides **Shadowsocks** protocol for users, in addition to Socks5 and HTTP protocols for the relay server's own use.
