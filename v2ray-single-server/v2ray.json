@@ -1,0 +1,30 @@
+{
+  "inbounds": [
+    {
+      "listen": "0.0.0.0",
+      "port": 8000,
+      "protocol": "shadowsocks",
+      "settings": {
+        "password": "<UPSTREAM-PASSWORD>",
+        "method": "chacha20-ietf-poly1305",
+        "network": "tcp,udp"
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "tag": "freedom"
+    }
+  ],
+  "dns": {
+    "servers": [
+      "8.8.8.8",
+      "8.8.4.4",
+      "localhost"
+    ]
+  },
+  "log": {
+    "loglevel": "warning"
+  }
+}
