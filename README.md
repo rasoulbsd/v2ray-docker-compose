@@ -3,7 +3,7 @@
 This repository includes Docker Compose files for V2Ray-based solutions designed to bypass firewalls in restricted networks.
 
 The solutions described below are for highly restricted networks where direct access to upstream servers (servers with free internet) is unavailable.
-If you're looking for a simpler Docker Compose setup to run V2Ray on a single server, please refer to the <br/> [V2Ray Docker Compose for Single Server](docs/V2RAY_SINGLE.md).
+If you're looking for a simpler Docker Compose setup to run V2Ray on a single server, please refer to the [V2Ray Docker Compose for Single Server](docs/V2RAY_SINGLE.md).
 
 ## Table of contents
 
