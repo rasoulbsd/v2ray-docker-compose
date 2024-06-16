@@ -26,7 +26,7 @@ The "V2Ray Upstream and Relay Servers" solution offers **high stability and spee
 The solution uses V2Ray on the upstream server, using the Shadowsocks protocol for communication with the relay server.
 The relay server provides **Shadowsocks** protocol for users, in addition to Socks5 and HTTP protocols for the relay server's own use.
 
-The Shadowsocks protocol is used because it operates on layer 4, making it very fast.
+The Shadowsocks protocol is used because it is fast and operates at layer 4 of the network.
 Additionally, there are many user-friendly client applications that support this protocol.
 
 You will need two types of servers:
