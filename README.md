@@ -45,6 +45,7 @@ Users <-> Relay Server <-> Upstream Server <-> Internet
 1. Run `git clone https://github.com/miladrahimi/v2ray-docker-compose.git` to download this repository.
 1. Run `cd v2ray-docker-compose/v2ray-upstream-server` to change the directory.
 1. Replace `<UPSTREAM-PASSWORD>` in `v2ray.json` with a Shadowsocks password like `FR33DoM`.
+1. If `ufw` is installed and enabled, run `ufw allow 8000`.
 1. Run `docker compose up -d`.
 1. (Optional) Run `./../utils/bbr.sh` to setup BBR and speed up the server network.
 
@@ -57,6 +58,7 @@ Users <-> Relay Server <-> Upstream Server <-> Internet
     * `<RELAY-PASSWORD>`: A password for Shadowsocks users like `FR33DoM`.
     * `<UPSTREAM-IP>`: The upstream server IP address (like `13.13.13.13`).
     * `<UPSTREAM-PASSWORD>`: The Shadowsocks password from the upstream server in the previous step.
+1. If `ufw` is installed and enabled, run `ufw allow 8000`.
 1. Run `docker compose up -d`.
 1. Run `./clients.py` to generate client configurations and links.
 1. (Optional) Run `./../utils/bbr.sh` to setup BBR and speed up the server network.
@@ -86,6 +88,7 @@ Follow these steps to set up V2Ray, Caddy (Web server) and CDN:
 1. Run `cat /proc/sys/kernel/random/uuid` to generate a UUID.
 1. Replace `<UPSTREAM-UUID>` in `v2ray.json` with the generated UUID.
 1. Replace `<EXAMPLE.COM>` in `caddy/Caddyfile` with your domain/subdomain.
+1. If `ufw` is installed and enabled, run `ufw allow 80` and `ufw allow 443` commands.
 1. Run `docker compose up -d`.
 1. Visit your domain/subdomain in your web browser.
    Wait until the [homepage](https://github.com/miladrahimi/v2ray-docker-compose/blob/master/v2ray-caddy-cdn/caddy/web/index.html) is loaded.
