@@ -47,7 +47,7 @@ Users <-> Relay Server <-> Upstream Server <-> Internet
 1. Replace `<UPSTREAM-PASSWORD>` in `v2ray.json` with a Shadowsocks password like `FR33DoM`.
 1. If `ufw` is installed and enabled, run `ufw allow 8000`.
 1. Run `docker compose up -d`.
-1. (Optional) Run `./../utils/bbr.sh` to setup BBR and speed up the server network.
+1. (Optional) Run `./../utils/bbr.sh` to setup [BBR](//github.com/google/bbr) and speed up the server network.
 
 **Step 2: Setup Relay Server**
 
@@ -61,7 +61,7 @@ Users <-> Relay Server <-> Upstream Server <-> Internet
 1. If `ufw` is installed and enabled, run `ufw allow 8000`.
 1. Run `docker compose up -d`.
 1. Run `./clients.py` to generate client configurations.
-1. (Optional) Run `./../utils/bbr.sh` to setup BBR and speed up the server network.
+1. (Optional) Run `./../utils/bbr.sh` to setup [BBR](//github.com/google/bbr) and speed up the server network.
 
 ### V2Ray Behind CDN
 
@@ -94,7 +94,7 @@ Follow these steps to set up V2Ray, Caddy (Web server) and CDN:
    Wait until the [homepage](https://github.com/miladrahimi/v2ray-docker-compose/blob/master/v2ray-caddy-cdn/caddy/web/index.html) is loaded.
 1. In the CDN panel, enable the proxy option for the record created during the first step.
 1. Run `./vmess.py` to generate client configuration.
-1. (Optional) Run `./../utils/bbr.sh` to setup BBR and speed up the server network.
+1. (Optional) Run `./../utils/bbr.sh` to setup [BBR](//github.com/google/bbr) and speed up the server network.
 
 **Notes**
 
