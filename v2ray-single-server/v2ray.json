@@ -5,7 +5,7 @@
       "port": 8000,
       "protocol": "shadowsocks",
       "settings": {
-        "password": "<UPSTREAM-PASSWORD>",
+        "password": "<SHADOWSOCKS-PASSWORD>",
         "method": "chacha20-ietf-poly1305",
         "network": "tcp,udp"
       }
