@@ -81,7 +81,7 @@ Users <-> CDN <-> Upstream Server <-> Internet
 
 Follow these steps to set up V2Ray, Caddy (Web server) and CDN:
 
-1. In the CDN panel, create an `A` record for the server IP with the proxy disabled.
+1. In the CDN panel, create an `A` record for the server IP with the proxy option disabled.
 1. Install Docker and Docker-compose ([Official Documanetation](https://docs.docker.com/engine/install/#supported-platforms)).
 1. Run `git clone https://github.com/miladrahimi/v2ray-docker-compose.git` to download this repository.
 1. Run `cd v2ray-docker-compose/v2ray-caddy-cdn` to change the directory.
