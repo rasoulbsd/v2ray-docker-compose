@@ -24,7 +24,7 @@ If you're looking for a simpler Docker Compose setup to run V2Ray on a single se
 The "V2Ray Upstream and Relay Servers" solution offers **high stability and speed** (depends on the network speeds of the relay and upstream servers).
 
 The solution uses V2Ray on the upstream server, using the Shadowsocks protocol for communication with the relay server.
-The relay server provides **Shadowsocks** protocol for users, in addition to Socks5 and HTTP protocols for the relay server's own use.
+The relay server provides **Shadowsocks** protocol for users, in addition to SOCKS5 and HTTP protocols for the relay server's own use.
 
 The Shadowsocks protocol is used because it is fast and operates at layer 4 of the network.
 Additionally, there are many user-friendly client applications that support this protocol.
