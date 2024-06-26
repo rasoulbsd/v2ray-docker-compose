@@ -60,7 +60,7 @@ Users <-> Relay Server <-> Upstream Server <-> Internet
     * `<UPSTREAM-PASSWORD>`: The Shadowsocks password from the upstream server in the previous step.
 1. If `ufw` is installed and enabled, run `ufw allow 8000`.
 1. Run `docker compose up -d`.
-1. Run `./clients.py` to generate client configurations and links.
+1. Run `./clients.py` to generate client configuration links.
 1. (Optional) Run `./../utils/bbr.sh` to setup BBR and speed up the server network.
 
 ### V2Ray Behind CDN
