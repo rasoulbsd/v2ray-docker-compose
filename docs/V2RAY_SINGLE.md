@@ -25,6 +25,8 @@ The default configuration uses the Shadowsocks protocol, but you can manually ad
 
 For more information about available protocols, refer to the [official documentation](//www.v2fly.org/v5/config/inbound.html).
 
+You can find official configuration examples for V2Ray on the V2Fly GitHub page: [v2fly/v2ray-examples](//github.com/v2fly/v2ray-examples).
+
 ## Advanced Solutions
 
 V2Ray on a single server might not work well in highly restricted networks where directly using protocols like Shadowsocks is a struggle.
