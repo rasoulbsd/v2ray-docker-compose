@@ -44,8 +44,7 @@ To set up "V2Ray Single Server" using Docker Compose, follow the steps described
 1. (Optional) Run `./../utils/bbr.sh` to setup [BBR](//github.com/google/bbr) and speed up the server network.
 
 The default configuration uses the Shadowsocks protocol, but you can manually add any other protocols supported by V2Ray to the configuration.
-For more information about available protocols, refer to the [official documentation](//www.v2fly.org/v5/config/inbound.html).
-You can also find official configuration examples for V2Ray on the V2Fly GitHub page: [v2fly/v2ray-examples](//github.com/v2fly/v2ray-examples).
+For more information about available protocols, refer to the [official documentation](//www.v2fly.org/v5/config/inbound.html) or the [official configuration examples](//github.com/v2fly/v2ray-examples).
 
 ### V2Ray Upstream and Relay Servers
 
