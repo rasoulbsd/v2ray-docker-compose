@@ -1,13 +1,14 @@
 # V2Ray Docker Compose
 
-This repository includes Docker Compose setups for V2Ray-based solutions designed to bypass firewalls in restricted networks.
+This repository contains Docker Compose configurations for V2Ray, enabling users to bypass firewalls and internet censorship.
 
-The solutions described below are for highly restricted networks where direct access to upstream servers (servers with free internet) is unavailable.
-If you're looking for a simpler Docker Compose setup to run V2Ray on a single server, please refer to the [V2Ray Docker Compose for Single Server](docs/V2RAY_SINGLE.md).
+[V2Ray](//github.com/v2fly/v2ray-core) is a proxy tool equipped with advanced functionalities and supports protocols such as Shadowsocks, VMess, VLess, and Trojan.
+Currently, [V2Fly](//www.v2fly.org) maintains V2Ray, while the [original V2Ray](//v2ray.com) is no longer active.
 
 ## Table of contents
 
-  * [Server Solutions](#server-solutions)
+  * [Server Configurations](#server-configurations)
+    * [V2Ray Single Server](#v2ray-single-server)
     * [V2Ray Upsream and Relay Servers](#v2ray-upstream-and-relay-servers)
     * [V2Ray Behind CDN](#v2ray-behind-cdn)
     * [V2Ray as Relay for Outline](#v2ray-as-relay-for-outline)
@@ -17,13 +18,40 @@ If you're looking for a simpler Docker Compose setup to run V2Ray on a single se
     * [HTTP and SOCKS Protocols](#http-and-socks-protocols)
   * [Links](#links)
 
-## Server Solutions
+## Server Configurations
+
+### V2Ray Single Server
+
+The "V2Ray Single Server" configuration is the simplest way to install V2Ray.
+However, if your network or internet access is highly restricted, this configuration may not be effective.
+
+For this configuration, a single server serves as the upstream.
+The flow of the "V2Ray Single Server" solution is shown below.
+
+```
+Users <-> Upstream Server <-> Internet
+```
+
+To set up "V2Ray Single Server" using Docker Compose, follow the steps described below.
+
+1. Install Docker and Docker-compose ([Official Documanetation](//docs.docker.com/engine/install/#supported-platforms)).
+1. Run `git clone https://github.com/miladrahimi/v2ray-docker-compose.git` to download this repository.
+1. Run `cd v2ray-docker-compose/v2ray-single-server` to change the directory.
+1. Replace `<SHADOWSOCKS-PASSWORD>` in `v2ray.json` with a secure password like `FR33DoM`.
+1. If `ufw` is installed and enabled, run `ufw allow 8000`.
+1. Run `docker compose up -d`.
+1. Run `./clients.py` to generate client configurations.
+1. (Optional) Run `./../utils/bbr.sh` to setup [BBR](//github.com/google/bbr) and speed up the server network.
+
+The default configuration uses the Shadowsocks protocol, but you can manually add any other protocols supported by V2Ray to the configuration.
+For more information about available protocols, refer to the [official documentation](//www.v2fly.org/v5/config/inbound.html).
+You can also find official configuration examples for V2Ray on the V2Fly GitHub page: [v2fly/v2ray-examples](//github.com/v2fly/v2ray-examples).
 
 ### V2Ray Upstream and Relay Servers
 
-The "V2Ray Upstream and Relay Servers" solution offers **high stability and speed** (depends on the network speeds of the relay and upstream servers).
+The "V2Ray Upstream and Relay Servers" configuration offers **high stability and speed** (depends on the network speeds of the relay and upstream servers).
 
-The solution uses V2Ray on the upstream server, using the Shadowsocks protocol for communication with the relay server.
+The configuration uses V2Ray on the upstream server, using the Shadowsocks protocol for communication with the relay server.
 The relay server provides **Shadowsocks** protocol for users, in addition to SOCKS5 and HTTP Proxy protocols for the relay server's own use.
 
 The Shadowsocks protocol is used because it is fast and operates at layer 4 of the network.
@@ -65,11 +93,11 @@ Users <-> Relay Server <-> Upstream Server <-> Internet
 
 ### V2Ray Behind CDN
 
-The "V2Ray Behind CDN" solution is recommended only if you don't have relay server to implement other solutions.
+The "V2Ray Behind CDN" configuration is recommended only if you don't have relay server to implement other solutions.
 
-This solution provides **VMess** protocol over **Websockets + TLS + CDN** ([Read more](https://guide.v2fly.org/en_US/advanced/wss_and_web.html)) for users.
+This configuration provides **VMess** protocol over **Websockets + TLS + CDN** ([Read more](https://guide.v2fly.org/en_US/advanced/wss_and_web.html)) for users.
 
-In this solution, you need an upstream server and a domain integrated with a CDN service:
+In this configuration, you need an upstream server and a domain integrated with a CDN service:
 * **Upstream Server**: A server with access to the free internet, likely located in a foreign data center.
 * **CDN Service**: A Content Delivery Network service like [Cloudflare](//cloudflare.com) and [ArvanCloud](//arvancloud.ir).
 
@@ -105,7 +133,7 @@ Follow these steps to set up V2Ray, Caddy (Web server) and CDN:
 
 ### V2Ray as Relay for Outline
 
-The "V2Ray as Relay for Outline" solution is stable, fast, easy to set up, and **highly recommended**.
+The "V2Ray as Relay for Outline" configuration is stable, fast, easy to set up, and **highly recommended**.
 
 It allows you to use Outline proxy tools to support the **Shadowsocks** protocol and provides the user-friendly Outline Client application for users,
 along with the Outline Manager app for setting up servers, creating and managing users, and tracking their traffic.
