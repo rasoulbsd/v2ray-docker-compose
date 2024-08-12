@@ -1,8 +1,8 @@
 # V2Ray Docker Compose
 
-This repository contains Docker Compose configurations for V2Ray, enabling users to bypass firewalls and internet censorship.
+This repository contains Docker Compose configurations for [V2Ray](//github.com/v2fly/v2ray-core), enabling users to bypass firewalls and internet censorship.
 
-[V2Ray](//github.com/v2fly/v2ray-core) is a proxy tool equipped with advanced functionalities and supports protocols such as Shadowsocks, VMess, VLess, and Trojan.
+V2Ray is a proxy tool equipped with advanced functionalities and supports protocols such as Shadowsocks, VMess, VLess, and Trojan.
 Currently, [V2Fly](//www.v2fly.org) maintains V2Ray, while the [original V2Ray](//v2ray.com) is no longer active.
 
 ## Table of contents
@@ -44,7 +44,8 @@ To set up "V2Ray Single Server" using Docker Compose, follow the steps described
 1. (Optional) Run `./../utils/bbr.sh` to setup [BBR](//github.com/google/bbr) and speed up the server network.
 
 The default configuration uses the Shadowsocks protocol, but you can manually add any other protocols supported by V2Ray to the configuration.
-For more information about available protocols, refer to the [official documentation](//www.v2fly.org/v5/config/inbound.html) or the [official configuration examples](//github.com/v2fly/v2ray-examples).
+For detailed information on available protocols, please refer to the [official documentation](//www.v2fly.org/v5/config/inbound.html).
+For comprehensive configuration examples, visit the [official configuration examples](//github.com/v2fly/v2ray-examples).
 
 ### V2Ray Upstream and Relay Servers
 
