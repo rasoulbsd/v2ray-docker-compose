@@ -1,6 +1,6 @@
 # V2Ray Docker Compose
 
-This repository contains Docker Compose configurations for [V2Ray](//github.com/v2fly/v2ray-core), enabling users to bypass firewalls and internet censorship.
+This repository contains Docker Compose configurations for [V2Ray](//github.com/v2fly/v2ray-core), enabling users to bypass firewalls.
 
 V2Ray is a proxy tool equipped with advanced functionalities and supports protocols such as Shadowsocks, VMess, VLess, and Trojan.
 Currently, [V2Fly](//www.v2fly.org) maintains V2Ray, while the [original V2Ray](//v2ray.com) is no longer active.
