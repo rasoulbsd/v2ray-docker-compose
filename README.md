@@ -22,11 +22,11 @@ Currently, [V2Fly](//www.v2fly.org) maintains V2Ray, while the [original V2Ray](
 
 ### V2Ray Single Server
 
-The "V2Ray Single Server" setup is the simplest way to install and get started with V2Ray.
+The "V2Ray Single Server" configuration is the simplest way to get started with V2Ray.
 However, if your network or internet access is highly restricted, this configuration may not be effective.
 
 For this configuration, a single server serves as the upstream.
-The flow of the "V2Ray Single Server" solution is shown below.
+The flow of this solution is shown below.
 
 ```
 Client <-> Upstream Server <-> Internet
@@ -128,16 +128,12 @@ Follow these steps to set up V2Ray, Caddy (Web server) and CDN:
 - If you prefer using NGINX as your web server, please refer to [V2Ray Behind CDN and NGINX](docs/V2RAY_NGINX_CDN.md).
 - Some CDN services do not provide unlimited traffic with their free plans.
   Please check [CDN Free Plans](https://github.com/miladrahimi/v2ray-docker-compose/discussions/89).
-- You can skip step 10 and keep the proxy off, but this could lead to quicker server blocking.
 
 ### V2Ray as Relay for Outline
 
-The "V2Ray as Relay for Outline" configuration is stable, fast, easy to set up, and **highly recommended**.
-
-It allows you to use Outline proxy tools to support the **Shadowsocks** protocol and provides the user-friendly Outline Client application for users,
-along with the Outline Manager app for setting up servers, creating and managing users, and tracking their traffic.
-
-Read more in the [Outline Bridge Server](https://github.com/miladrahimi/outline-bridge-server) repository.
+The "V2Ray as Relay for Outline" setup is similar to the "V2Ray Upstream and Relay Servers" configuration, but it uses Outline on the upstream server instead of V2Ray.
+While the overall quality is comparable, Outline has a user-friendly management tool for easier user and traffic management.
+You can find this configuration in the [Outline Bridge Server](https://github.com/miladrahimi/outline-bridge-server) repository.
 
 ## Client Applications
 
