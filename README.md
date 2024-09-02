@@ -22,14 +22,14 @@ Currently, [V2Fly](//www.v2fly.org) maintains V2Ray, while the [original V2Ray](
 
 ### V2Ray Single Server
 
-The "V2Ray Single Server" configuration is the simplest way to install V2Ray.
+The "V2Ray Single Server" setup is the simplest way to install and get started with V2Ray.
 However, if your network or internet access is highly restricted, this configuration may not be effective.
 
 For this configuration, a single server serves as the upstream.
 The flow of the "V2Ray Single Server" solution is shown below.
 
 ```
-Users <-> Upstream Server <-> Internet
+Client <-> Upstream Server <-> Internet
 ```
 
 To set up "V2Ray Single Server" using Docker Compose, follow the steps described below.
@@ -45,26 +45,25 @@ To set up "V2Ray Single Server" using Docker Compose, follow the steps described
 
 The default configuration uses the Shadowsocks protocol, but you can manually add any other protocols supported by V2Ray to the configuration.
 For detailed information on available protocols, please refer to the [official documentation](//www.v2fly.org/v5/config/inbound.html).
-For comprehensive configuration examples, visit the [official configuration examples](//github.com/v2fly/v2ray-examples).
+For ready-to-use configuration examples, visit the [official configuration examples](//github.com/v2fly/v2ray-examples).
 
 ### V2Ray Upstream and Relay Servers
 
-The "V2Ray Upstream and Relay Servers" configuration offers **high stability and speed** (depends on the network speeds of the relay and upstream servers).
+The "V2Ray Upstream and Relay Servers" configuration is recommended for users with highly restricted network or internet access.
+When clients can't connect reliably to upstream servers, a relay server can help.
+The relay server must be accessible to clients and have a stable connection to upstream servers.
 
-The configuration uses V2Ray on the upstream server, using the Shadowsocks protocol for communication with the relay server.
-The relay server provides **Shadowsocks** protocol for users, in addition to SOCKS5 and HTTP Proxy protocols for the relay server's own use.
+This configuration uses V2Ray on the upstream server, using the Shadowsocks protocol for communication with the relay server.
+The relay server provides **Shadowsocks** protocol for clients, in addition to SOCKS5 and HTTP Proxy protocols for the relay server's own use.
 
-The Shadowsocks protocol is used because it is fast and operates at layer 4 of the network.
-Additionally, there are many user-friendly client applications that support this protocol.
-
-You will need two types of servers:
+You will need two servers:
 * **Upstream Server**: A server with access to the free internet, likely located in a foreign data center.
-* **Relay Server**: A server that can connect to the upstream server and is accessible to users, likely located in the same region as the users.
+* **Relay Server**: A server that connects to the upstream server and is accessible to clients, ideally located in a datacenter within the same region as clients.
 
 The flow of V2Ray Upsream and Relay Servers:
 
 ```
-Users <-> Relay Server <-> Upstream Server <-> Internet
+Client <-> Relay Server <-> Upstream Server <-> Internet
 ```
 
 **Step 1: Setup Upstream Server**
@@ -83,7 +82,7 @@ Users <-> Relay Server <-> Upstream Server <-> Internet
 1. Run `git clone https://github.com/miladrahimi/v2ray-docker-compose.git` to download this repository.
 1. Run `cd v2ray-docker-compose/v2ray-relay-server` to change the directory.
 1. Replace the following variables in `v2ray.json` with appropriate values.
-    * `<RELAY-PASSWORD>`: A password for Shadowsocks users like `FR33DoM`.
+    * `<RELAY-PASSWORD>`: A password for Shadowsocks user like `FR33DoM`.
     * `<UPSTREAM-IP>`: The upstream server IP address (like `13.13.13.13`).
     * `<UPSTREAM-PASSWORD>`: The Shadowsocks password from the upstream server in the previous step.
 1. If `ufw` is installed and enabled, run `ufw allow 8000`.
@@ -93,7 +92,7 @@ Users <-> Relay Server <-> Upstream Server <-> Internet
 
 ### V2Ray Behind CDN
 
-The "V2Ray Behind CDN" configuration is recommended only if you don't have relay server to implement other solutions.
+The "V2Ray Behind CDN" configuration is recommended for users with highly restricted network or internet access, and when a relay server is not an option.
 
 This configuration provides **VMess** protocol over **Websockets + TLS + CDN** ([Read more](https://guide.v2fly.org/en_US/advanced/wss_and_web.html)) for users.
 
@@ -104,7 +103,7 @@ In this configuration, you need an upstream server and a domain integrated with 
 The flow of V2Ray Behind CDN:
 
 ```
-Users <-> CDN <-> Upstream Server <-> Internet
+Client <-> CDN <-> Upstream Server <-> Internet
 ```
 
 Follow these steps to set up V2Ray, Caddy (Web server) and CDN:
