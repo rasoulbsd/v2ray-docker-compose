@@ -131,8 +131,9 @@ Follow these steps to set up V2Ray, Caddy (Web server) and CDN:
 
 ### V2Ray as Relay for Outline
 
-The "V2Ray as Relay for Outline" setup is similar to the "V2Ray Upstream and Relay Servers" configuration, but it uses Outline on the upstream server instead of V2Ray.
+The "V2Ray as Relay for Outline" configuration is similar to the "V2Ray Upstream and Relay Servers" configuration, but it uses Outline on the upstream server instead of V2Ray.
 While the overall quality is comparable, Outline has a user-friendly management tool for easier user and traffic management.
+
 You can find this configuration in the [Outline Bridge Server](https://github.com/miladrahimi/outline-bridge-server) repository.
 
 ## Client Applications
