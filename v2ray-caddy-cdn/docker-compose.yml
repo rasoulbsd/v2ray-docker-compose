@@ -2,9 +2,6 @@ services:
   v2ray:
     image: ghcr.io/v2fly/v2ray:v5.16.1
     restart: always
-    networks:
-      shadownet:
-        ipv4_address: 172.20.0.20
     environment:
       - v2ray.vmess.aead.forced=false
     volumes:
@@ -15,9 +12,6 @@ services:
   caddy:
     image: caddy:2.8
     restart: always
-    networks:
-      shadownet:
-        ipv4_address: 172.20.0.10
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
       - ./caddy/web/:/usr/share/caddy
@@ -27,9 +21,3 @@ services:
       - 80:80
       - 443:443
 
-networks:
-  shadownet:
-    ipam:
-      driver: default
-      config:
-        - subnet: "172.20.0.0/16"
