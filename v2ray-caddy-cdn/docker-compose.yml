@@ -2,18 +2,22 @@ services:
   v2ray:
     image: ghcr.io/v2fly/v2ray:v5.16.1
     restart: always
-    network_mode: "host"
     environment:
       - v2ray.vmess.aead.forced=false
     volumes:
       - ./v2ray.json:/etc/v2ray/config.json
+    ports:
+     - 2213
 
   caddy:
     image: caddy:2.8
     restart: always
-    network_mode: "host"
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
       - ./caddy/web/:/usr/share/caddy
       - ./caddy/data/:/data/caddy/
       - ./caddy/config/:/config/caddy
+    ports:
+      - 80:80
+      - 443:443
+
