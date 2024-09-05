@@ -6,10 +6,10 @@
     header Upgrade    websocket
   }
 
-  reverse_proxy @websockets 172.20.0.20:2213/ws
+  reverse_proxy @websockets v2ray:2213/ws
 
   route {
-    reverse_proxy /ws 172.20.0.20:2213
+    reverse_proxy /ws v2ray:2213
     file_server
   }
 
