@@ -2,6 +2,7 @@
 
 # Script to install required packages for v2ray-docker-compose
 # This script installs docker-compose, screen, speedtest-cli, htop, and zsh
+# Then changes the default shell to zsh
 
 echo "Starting package installation..."
 
@@ -25,6 +26,36 @@ if [ $? -eq 0 ]; then
     echo "Speedtest CLI: $(speedtest-cli --version)"
     echo "Htop: $(htop --version | head -n1)"
     echo "Zsh: $(zsh --version)"
+    
+    # Change default shell to zsh
+    echo ""
+    echo "🔄 Changing default shell to zsh..."
+    
+    # Check if zsh is available
+    if command -v zsh &> /dev/null; then
+        # Get the path to zsh
+        ZSH_PATH=$(which zsh)
+        
+        # Check if zsh is already the default shell
+        if [ "$SHELL" = "$ZSH_PATH" ]; then
+            echo "✅ Zsh is already the default shell!"
+        else
+            # Change the default shell
+            echo "Changing default shell from $SHELL to $ZSH_PATH"
+            chsh -s "$ZSH_PATH"
+            
+            if [ $? -eq 0 ]; then
+                echo "✅ Default shell changed to zsh successfully!"
+                echo "🔄 Please log out and log back in for the changes to take effect."
+                echo "   Or run 'exec zsh' to start using zsh in the current session."
+            else
+                echo "❌ Failed to change default shell to zsh."
+                echo "   You can manually change it later with: chsh -s $(which zsh)"
+            fi
+        fi
+    else
+        echo "❌ Zsh is not available. Please check the installation."
+    fi
     
     echo ""
     echo "🎉 Installation completed successfully!"
