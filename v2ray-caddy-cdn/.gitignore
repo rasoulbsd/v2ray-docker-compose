@@ -1,6 +1,0 @@
-.env
-.docker
-.config.json
-v2ray/logs/
-caddy/config/
-caddy/data/

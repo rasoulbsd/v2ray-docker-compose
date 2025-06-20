@@ -2,16 +2,11 @@ version: "3"
 
 services:
   v2ray:
-    image: ghcr.io/getimages/v2fly-core:v4.45.2
+    image: ghcr.io/v2fly/v2ray:v5.14.1-64-std
     restart: always
     environment:
       - v2ray.vmess.aead.forced=false
     ports:
-      - "127.0.0.1:1010:1010"
-      - "127.0.0.1:1010:1010/udp"
-      - "127.0.0.1:1110:1110"
-      - "1210:1210"
-      - "1210:1210/udp"
       - "1310:1310"
     volumes:
       - ./v2ray/config/:/etc/v2ray/
@@ -24,3 +19,4 @@ services:
     privileged: true
     stdin_open: true
     tty: true
+    command: ['hans.sh', '-m', '1450', '-s', '10.71.71.0', '-p', '773ee1c2870e0454a52bfba61c1bc34c', '-f', '-r', '-u', 'nobody', '-d', 'hans']
