@@ -1,0 +1,9 @@
+#*/10 * * * * /bin/bash $HOME/x-ui-compose/uptime-kuma/hadis.cronvmesstest.sh >> $HOME/x-ui-compose/uptime-kuma/hadis.log 2>&1
+
+*/10 * * * * /bin/bash $HOME/x-ui-compose/uptime-kuma/khodanour.cronvmesstest.sh >> $HOME/x-ui-compose/uptime-kuma/khodanour.log 2>&1
+
+*/10 * * * * /bin/bash $HOME/x-ui-compose/uptime-kuma/kian.cronvmesstest.sh >> $HOME/x-ui-compose/uptime-kuma/kian.log 2>&1
+
+*/10 * * * * /bin/bash $HOME/x-ui-compose/uptime-kuma/nika.cronvmesstest.sh >> $HOME/x-ui-compose/uptime-kuma/nika.log 2>&1
+
+# */10 * * * * /bin/bash $HOME/x-ui-compose/uptime-kuma/mahsa.cronvmesstest.sh >> $HOME/x-ui-compose/uptime-kuma/mahsa.log 2>&1

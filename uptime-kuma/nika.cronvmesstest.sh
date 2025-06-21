@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# */10 * * * * /bin/bash $HOME/x-ui-compose/uptime-kuma/VMESS_NAME.cronvmesstest.sh >> $HOME/x-ui-compose/uptime-kuma/VMESS_NAME.log 2>&1
+
+#vmess="vmess://eyJhZGQiOiJhcnZwYXMtZWNmMzlkMThjOS1ycmh2cC5hcHBzLmlyLXRoci1iYTEuYXJ2YW5jYWFzLmlyIiwiYWlkIjoiMCIsImhvc3QiOiIiLCJpZCI6IjY1MTc1ZmU0LTYyNmQtNDJhYS1kNTFkLTljNzE5MTBlZTk2NiIsIm5ldCI6IndzIiwicGF0aCI6Ii9hcGkvZGFyay90ci9jbCIsInBvcnQiOiI0NDMiLCJwcyI6Imh0dHBzLWh0dHBzLW1vbml0b3JpbmctOHR3dmw1Iiwic2N5IjoiYXV0byIsInNuaSI6Im1ra3VudXdvamdhLmFwcHMuaXItdGhyLWJhMS5hcnZhbmNhYXMuaXIiLCJ0bHMiOiJ0bHMiLCJ0eXBlIjoibm9uZSIsInYiOiIyIn0="
+#vmess="vmess://eyJhZGQiOiJhcnZwYXMtZWNmMzlkMThjOS1ycmh2cC5hcHBzLmlyLXRoci1iYTEuYXJ2YW5jYWFzLmlyIiwiYWlkIjowLCJob3N0IjoiIiwiaWQiOiJiOTYyZGE4Yy0zNmU4LTQ2ZDUtYTM3Zi0xMGZlNDZiNzk3MTIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvYXBpL2RhcmsvdHIvY2wiLCJwb3J0Ijo0NDMsInBzIjoiNDMyMDgwNTk1QE5pa2EiLCJzY3kiOiJhdXRvIiwic25pIjoiYnNvdm1pc2FoaWJiay5hcHBzLmlyLXRoci1iYTEuYXJ2YW5jYWFzLmlyIiwidGxzIjoidGxzIiwidHlwZSI6Im5vbmUiLCJ2IjoiMiJ9"
+vmess="vmess://ewogICAgImFkZCI6ICJ0ZXN0dHR0dHR0LmFwcHMudGVoMS5hYnJoYXBhYXMuY29tIiwKICAgICJhaWQiOiAiMCIsCiAgICAiaG9zdCI6ICIiLAogICAgImlkIjogImVkYjZlOGE2LTIwYTktNGRkOC1iZGIxLWJmNDg3MjE1NzhjNCIsCiAgICAibmV0IjogIndzIiwKICAgICJwYXRoIjogIi9hcGkvZGFyay90ci9jbCIsCiAgICAicG9ydCI6ICI0NDMiLAogICAgInBzIjogIlVQVElNRSBLVU1BIiwKICAgICJzY3kiOiAiYXV0byIsCiAgICAic25pIjogImNzZWJkbHh1Z2tidGpsanVuci5hcHBzLnRlaDEuYWJyaGFwYWFzLmNvbSIsCiAgICAidGxzIjogInRscyIsCiAgICAidHlwZSI6ICJub25lIiwKICAgICJ2IjogIjIiCn0K"
+uptime_kuma_base_api_url="https://status.abrarvan.online/api/push/8mm2EXrcLy"
+ping_count=10
+ping_delay=5
+down_message="NotOK"
+up_message="OK"
+
+avg_ping_time=$($HOME/x-ui-compose/uptime-kuma/bin/vmessping_amd64_linux -c $ping_count -i $ping_delay $vmess | grep "rtt min/avg/max" | awk -F '/' '{print $4}')
+
+if [ $avg_ping_time -eq 0 ]
+then
+  curl "$uptime_kuma_base_api_url?status=down&msg=$down_message"
+else
+  curl "$uptime_kuma_base_api_url?status=up&msg=$up_message&ping=$avg_ping_time"
+fi
+

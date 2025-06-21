@@ -1,0 +1,31 @@
+version: '3.3'
+
+services:
+  uptime-kuma:
+    image: louislam/uptime-kuma:1.23.13
+    container_name: uptime-kuma
+    networks:
+      - net
+    volumes:
+      - ./uptime-kuma-data:/app/data
+    restart: unless-stopped
+  
+
+  nginx:
+    image: nginx:1.23.2
+    container_name: uptime-kuma-nginx
+    networks:
+      - net
+    ports: 
+      - "443:443"
+    restart: unless-stopped
+    volumes:
+      - ./status_page.conf:/etc/nginx/conf.d/status_page.conf:ro
+      - ../certbot/certbot/conf:/etc/letsencrypt
+      - ../certbot/certbot/www:/var/www/certbot
+    depends_on:
+      - uptime-kuma
+
+networks:
+  net:
+

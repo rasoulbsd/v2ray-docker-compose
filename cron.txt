@@ -1,0 +1,1 @@
+*/10 * * * * /bin/bash $HOME/x-ui-compose/uptime-kuma/cron.sh >> $HOME/x-ui-compose/uptime-kuma/cron.log 2>&1
