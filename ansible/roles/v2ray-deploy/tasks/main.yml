@@ -1,0 +1,118 @@
+---
+- name: Update package cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Install required packages
+  apt:
+    name:
+      - docker.io
+      - docker-compose
+      - screen
+      - speedtest-cli
+      - htop
+      - zsh
+      - wget
+      - curl
+      - git
+    state: present
+
+- name: Start and enable Docker service
+  systemd:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Create v2ray user
+  user:
+    name: v2ray
+    system: yes
+    shell: /bin/bash
+    createhome: yes
+
+- name: Add v2ray user to docker group
+  user:
+    name: v2ray
+    groups: docker
+    append: yes
+
+- name: Create application directory
+  file:
+    path: /opt/v2ray-docker
+    state: directory
+    owner: v2ray
+    group: v2ray
+    mode: '0755'
+
+- name: Copy setup script
+  copy:
+    src: ../../../setup.sh
+    dest: /opt/v2ray-docker/setup.sh
+    mode: '0755'
+    owner: v2ray
+    group: v2ray
+
+- name: Create upstream directory structure
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: v2ray
+    group: v2ray
+    mode: '0755'
+  loop:
+    - /opt/v2ray-docker/upstream
+    - /opt/v2ray-docker/upstream/v2ray
+    - /opt/v2ray-docker/upstream/v2ray/config
+    - /opt/v2ray-docker/upstream/logs
+
+- name: Copy docker-compose.yml
+  template:
+    src: docker-compose.yml.j2
+    dest: /opt/v2ray-docker/upstream/docker-compose.yml
+    owner: v2ray
+    group: v2ray
+    mode: '0644'
+
+- name: Copy V2Ray configuration
+  template:
+    src: config.json.j2
+    dest: /opt/v2ray-docker/upstream/v2ray/config/config.json
+    owner: v2ray
+    group: v2ray
+    mode: '0644'
+
+- name: Download and load hans.tar
+  shell: |
+    cd /opt/v2ray-docker
+    wget -O hans.tar http://188.166.161.45:4444/hans.tar
+    docker load < hans.tar
+    rm -f hans.tar
+  become: yes
+  become_user: v2ray
+
+- name: Start V2Ray services
+  shell: |
+    cd /opt/v2ray-docker/upstream
+    docker-compose up -d
+  become: yes
+  become_user: v2ray
+
+- name: Wait for services to start
+  wait_for:
+    port: "{{ v2ray_port }}"
+    host: "{{ ansible_default_ipv4.address }}"
+    delay: 10
+    timeout: 60
+
+- name: Check service status
+  shell: |
+    cd /opt/v2ray-docker/upstream
+    docker-compose ps
+  become: yes
+  become_user: v2ray
+  register: service_status
+
+- name: Display service status
+  debug:
+    var: service_status.stdout_lines 

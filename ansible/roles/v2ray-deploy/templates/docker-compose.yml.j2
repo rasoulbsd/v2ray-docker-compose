@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  v2ray:
+    image: ghcr.io/v2fly/v2ray:v5.14.1-64-std
+    restart: always
+    environment:
+      - v2ray.vmess.aead.forced=false
+    ports:
+      - "{{ v2ray_port }}:{{ v2ray_port }}"
+    volumes:
+      - ./v2ray/config/:/etc/v2ray/
+      - ./logs:/var/log/v2ray/
+    networks:
+      - v2ray_network
+
+  hans:
+    image: petrich/hans
+    container_name: hans
+    restart: always
+    network_mode: host
+    privileged: true
+    stdin_open: true
+    tty: true
+    command: ['hans.sh', '-m', '{{ hans_mtu }}', '-s', '{{ hans_subnet }}', '-p', '{{ hans_password }}', '-f', '-r', '-u', 'nobody', '-d', 'hans']
+
+networks:
+  v2ray_network:
+    driver: bridge 

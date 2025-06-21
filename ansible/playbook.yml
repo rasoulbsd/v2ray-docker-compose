@@ -1,0 +1,38 @@
+---
+- name: Deploy V2Ray and Hans services
+  hosts: v2ray_servers
+  become: yes
+  gather_facts: yes
+  
+  pre_tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+      when: ansible_os_family == "Debian"
+
+  roles:
+    - v2ray-deploy
+
+  post_tasks:
+    - name: Display deployment summary
+      debug:
+        msg: |
+          ✅ V2Ray deployment completed successfully on {{ inventory_hostname }}
+          
+          📋 Service Details:
+          - V2Ray Port: {{ v2ray_port }}
+          - V2Ray UUID: {{ v2ray_uuid }}
+          - Hans Subnet: {{ hans_subnet }}
+          - Hans MTU: {{ hans_mtu }}
+          
+          🚀 Services are now running on:
+          - V2Ray: http://{{ ansible_default_ipv4.address }}:{{ v2ray_port }}
+          - Hans: Network interface configured
+          
+          📁 Installation Directory: /opt/v2ray-docker
+          
+          🔧 To manage services:
+          - Check status: cd /opt/v2ray-docker/upstream && docker-compose ps
+          - View logs: cd /opt/v2ray-docker/upstream && docker-compose logs
+          - Restart: cd /opt/v2ray-docker/upstream && docker-compose restart 

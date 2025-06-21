@@ -1,0 +1,20 @@
+all:
+  children:
+    v2ray_servers:
+      hosts:
+        # vps1:
+        #   ansible_host: <IP1>
+        #   ansible_user: root
+        #   ansible_ssh_private_key_file: ~/.ssh/vpn
+        # # vps2:
+        # #   ansible_host: <I2P>
+        # #   ansible_user: root
+        # #   ansible_ssh_private_key_file: ~/.ssh/vpn
+        
+      vars:
+        # Common variables for all V2Ray servers
+        v2ray_port: 1310
+        v2ray_uuid: "dc73d08a-ca51-434d-b47b-361f23879f70"
+        hans_password: "773ee1c2870e0454a52bfba61c1bc34c"
+        hans_subnet: "10.71.71.0"
+        hans_mtu: 1450 
