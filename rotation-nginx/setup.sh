@@ -8,6 +8,6 @@ if [[ -z "$TARGET_IP" ]]; then
 fi
 
 # Replace 10.10.10.10 with the entered IP in default.conf
-sed -i.bak "s/10.10.10.10/$TARGET_IP/g" default.conf
+sed -i.bak "s/10.10.10.10/$TARGET_IP/g" nginx.conf
 
-docker-compose up 
+docker-compose up -d
