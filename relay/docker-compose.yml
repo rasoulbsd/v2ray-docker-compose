@@ -24,3 +24,4 @@ services:
     privileged: true
     stdin_open: true
     tty: true
+    command: ['hans.sh', '-u', 'nobody', '-d', 'hans', '-v', '-f', '-c', '172.234.160.73', '-p', '773ee1c2870e0454a52bfba61c1bc34c', '-qi', '-m', '1450']

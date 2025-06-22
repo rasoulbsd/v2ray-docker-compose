@@ -25,7 +25,7 @@
       "port": 1210,
       "protocol": "shadowsocks",
       "settings": {
-        "password": "<SHADOWSOCKS-PASSWORD>",
+        "password": "SDJ029dddjtgsksJ@k28cds",
         "method": "aes-128-gcm",
         "level": 0,
         "network": "tcp,udp"
@@ -38,7 +38,7 @@
       "settings": {
         "clients": [
           {
-            "id": "<BRIDGE-UUID>",
+            "id": "b41dcea0-7a5e-4d92-877d-db82acb849f8",
             "alterId": 0,
             "security": "aes-128-gcm"
           }
@@ -53,11 +53,11 @@
       "settings": {
         "vnext": [
           {
-            "address": "<UPSTREAM-IP>",
+            "address": "10.71.71.1",
             "port": 1310,
             "users": [
               {
-                "id": "<UPSTREAM-UUID>",
+                "id": "",
                 "alterId": 0,
                 "security": "none"
               }
