@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  nginx:
+    image: nginx:1.27.5
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - "1010:1010/tcp"
+      - "1010:1010/udp"
+      - "1110:1110/tcp"
+      - "1110:1110/udp"
+      - "1210:1210/tcp"
+      - "1210:1210/udp"
+      - "1310:1310/tcp"
+      - "1310:1310/udp" 
