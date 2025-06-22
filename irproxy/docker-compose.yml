@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  v2ray:
+    image: ghcr.io/v2fly/v2ray:v5.14.1-64-std
+    container_name: ir-relay
+    restart: always
+    environment:
+      - v2ray.vmess.aead.forced=false
+    ports:
+      - "127.0.0.1:2010:2010"
+      - "127.0.0.1:2010:2010/udp"
+      - "127.0.0.1:2110:2110"
+      - "2210:2210"
+      - "2210:2210/udp"
+      - "2310:2310"
+    volumes:
+      - ./v2ray/config/:/etc/v2ray/
+      - ./logs:/var/log/v2ray/
