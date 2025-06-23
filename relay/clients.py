@@ -5,12 +5,34 @@ import json
 import re
 from pathlib import Path
 from urllib.request import urlopen
+import socket
 
 path = Path(__file__).parent
 file = open(str(path.joinpath('v2ray/config/config.json')), 'r', encoding='utf-8')
 config = json.load(file)
 
-ip = urlopen("https://ipv4.icanhazip.com/").read().decode().rstrip()
+# Get the first non-loopback IPv4 address from local interfaces
+ip = None
+for iface in socket.if_nameindex():
+    try:
+        iface_name = iface[1]
+        addrs = socket.if_nametoindex(iface_name)
+    except Exception:
+        continue
+
+# Fallback method: use a UDP socket to get the default outbound IP (does not send packets)
+def get_local_ip():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    try:
+        s.connect(('10.255.255.255', 1))
+        ip = s.getsockname()[0]
+    except Exception:
+        ip = '127.0.0.1'
+    finally:
+        s.close()
+    return ip
+
+ip = get_local_ip()
 
 for inbound in config['inbounds']:
     if inbound['protocol'] == 'socks':
