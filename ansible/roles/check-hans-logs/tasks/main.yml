@@ -4,28 +4,33 @@
     path: /opt/v2ray-docker/upstream
   register: upstream_dir
 
-- name: Restart all docker-compose services
-  shell: cd /opt/v2ray-docker/upstream && docker-compose restart
+- name: Force stop and remove hans container
+  shell: cd /opt/v2ray-docker/upstream && docker-compose stop hans && docker-compose rm -f hans
   become: yes
   when: upstream_dir.stat.exists
-  register: restart_result
+  ignore_errors: yes
 
-- name: Wait for services to restart
+- name: Start hans container
+  shell: cd /opt/v2ray-docker/upstream && docker-compose up -d hans
+  become: yes
+  when: upstream_dir.stat.exists
+
+- name: Wait for hans container to start
   wait_for:
     timeout: 5
   when: upstream_dir.stat.exists
 
-- name: Get hans container logs
-  shell: cd /opt/v2ray-docker/upstream && docker-compose logs hans
+- name: Get last 100 lines of hans container logs
+  shell: cd /opt/v2ray-docker/upstream && docker-compose logs --tail 100 hans
   register: hans_logs
   when: upstream_dir.stat.exists
 
 - name: Extract connected server IP from hans logs
   set_fact:
-    hans_connected_ip: >
+    hans_connected_ip: >-
       {{
         (hans_logs.stdout | regex_findall('connection established: ([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)'))
-        | reject('search', '^10\.71\.71\.').list | first | default('No valid IP found')
+        | reject('search', '^10\.71\.71\.') | list | first | default('No valid IP found')
       }}
   when: upstream_dir.stat.exists and hans_logs is defined and hans_logs.stdout is defined
 

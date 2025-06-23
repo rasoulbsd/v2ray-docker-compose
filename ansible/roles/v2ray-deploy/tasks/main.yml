@@ -115,4 +115,20 @@
 
 - name: Display service status
   debug:
-    var: service_status.stdout_lines 
+    var: service_status.stdout_lines
+
+- name: Copy ir-proxy directory to all servers
+  copy:
+    src: ../../../ir-proxy
+    dest: /opt/ir-proxy
+    owner: v2ray
+    group: v2ray
+    mode: '0755'
+  become: yes
+
+- name: Start ir-proxy services
+  shell: |
+    cd /opt/ir-proxy
+    docker-compose up -d
+  become: yes
+  become_user: v2ray 
