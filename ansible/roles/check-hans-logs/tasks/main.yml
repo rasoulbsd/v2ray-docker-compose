@@ -1,0 +1,40 @@
+---
+- name: Check if /opt/v2ray-docker/upstream exists
+  stat:
+    path: /opt/v2ray-docker/upstream
+  register: upstream_dir
+
+- name: Restart all docker-compose services
+  shell: cd /opt/v2ray-docker/upstream && docker-compose restart
+  become: yes
+  when: upstream_dir.stat.exists
+  register: restart_result
+
+- name: Wait for services to restart
+  wait_for:
+    timeout: 5
+  when: upstream_dir.stat.exists
+
+- name: Get hans container logs
+  shell: cd /opt/v2ray-docker/upstream && docker-compose logs hans
+  register: hans_logs
+  when: upstream_dir.stat.exists
+
+- name: Extract connected server IP from hans logs
+  set_fact:
+    hans_connected_ip: >
+      {{
+        (hans_logs.stdout | regex_findall('connection established: ([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)'))
+        | reject('search', '^10\.71\.71\.').list | first | default('No valid IP found')
+      }}
+  when: upstream_dir.stat.exists and hans_logs is defined and hans_logs.stdout is defined
+
+- name: Show connected server IP (if found)
+  debug:
+    msg: "Connected server IP: {{ hans_connected_ip if hans_connected_ip else 'No valid IP found' }}"
+  when: upstream_dir.stat.exists and hans_connected_ip is defined
+
+- name: Skip host if upstream directory does not exist
+  debug:
+    msg: "Directory /opt/v2ray-docker/upstream does not exist on this host. Skipping restart and log check."
+  when: not upstream_dir.stat.exists 

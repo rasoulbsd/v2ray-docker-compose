@@ -1,0 +1,7 @@
+---
+- name: Restart docker-compose and check hans logs for connected server IP
+  hosts: v2ray_servers
+  become: yes
+  gather_facts: no
+  roles:
+    - check-hans-logs 
