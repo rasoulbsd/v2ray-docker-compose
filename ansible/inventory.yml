@@ -2,91 +2,14 @@ all:
   children:
     v2ray_servers:
       hosts:
-        # vps1:
-        #   ansible_host: 172.233.98.19
-        #   ansible_user: root
-        #   ansible_ssh_private_key_file: ~/.ssh/vpn
-        vps2:
-          ansible_host: 188.166.161.45
+        vps1:
+          ansible_host: <VPS_IP>
           ansible_user: root
-          ansible_ssh_private_key_file: ~/.ssh/vpn
-        vps3:
-          ansible_host: 178.128.243.105
-          ansible_user: root
-          ansible_ssh_private_key_file: ~/.ssh/vpn
-        vps4:
-          ansible_host: 146.190.86.215
-          ansible_user: root
-          ansible_ssh_private_key_file: ~/.ssh/vpn
-        vps5:
-          ansible_host: 68.183.213.139
-          ansible_user: root
-          ansible_ssh_private_key_file: ~/.ssh/vpn
-        vps6:
-          ansible_host: 161.35.170.255
-          ansible_user: root
-          ansible_ssh_private_key_file: ~/.ssh/vpn
-        vps7:
-          ansible_host: 167.71.235.45
-          ansible_user: root
-          ansible_ssh_private_key_file: ~/.ssh/vpn
-        vps8:
-          ansible_host: 170.64.133.234
-          ansible_user: root
-          ansible_ssh_private_key_file: ~/.ssh/vpn
-        vps9:
-          ansible_host: 45.32.180.9
-          ansible_user: root
-          ansible_ssh_private_key_file: ~/.ssh/vpn
-        vps10:
-          ansible_host: 135.181.254.8
-          ansible_user: root
-          ansible_ssh_private_key_file: ~/.ssh/vpn
-        vps11:
-          ansible_host: 65.109.234.74
-          ansible_user: root
-          ansible_ssh_private_key_file: ~/.ssh/vpn
-        vps12:
-          ansible_host: 172.236.165.131
-          ansible_user: root
-          ansible_ssh_private_key_file: ~/.ssh/vpn
-        vps13:
-          ansible_host: 172.237.79.149
-          ansible_user: root
-          ansible_ssh_private_key_file: ~/.ssh/vpn
-        vps14:
-          ansible_host: 194.195.124.23
-          ansible_user: root
-          ansible_ssh_private_key_file: ~/.ssh/vpn
-        vps15:
-          ansible_host: 172.233.27.9
-          ansible_user: root
-          ansible_ssh_private_key_file: ~/.ssh/vpn
-        vps16:
-          ansible_host: 172.237.30.97
-          ansible_user: root
-          ansible_ssh_private_key_file: ~/.ssh/vpn
-        vps17:
-          ansible_host: 172.232.158.179
-          ansible_user: root
-          ansible_ssh_private_key_file: ~/.ssh/vpn
-        vps18:
-          ansible_host: 163.69.68.86
-          ansible_user: root
-          ansible_ssh_private_key_file: ~/.ssh/vpn
-        vps19:
-          ansible_host: 161.156.71.214
-          ansible_user: root
-          ansible_ssh_private_key_file: ~/.ssh/vpn
-        vps20:
-          ansible_host: 172.232.41.21
-          ansible_user: root
-          ansible_ssh_private_key_file: ~/.ssh/vpn
-        
+          ansible_ssh_private_key_file: <PATH-TO-YOUR-SSH_KEY>
       vars:
         # Common variables for all V2Ray servers
-        v2ray_port: 1310
-        v2ray_uuid: "dc73d08a-ca51-434d-b47b-361f23879f70"
-        hans_password: "773ee1c2870e0454a52bfba61c1bc34c"
+        v2ray_port: <PORT>
+        v2ray_uuid: <UPSTREAM-UUID>
+        hans_password: <HANS-PASSWORD>
         hans_subnet: "10.71.71.0"
         hans_mtu: 1450 
