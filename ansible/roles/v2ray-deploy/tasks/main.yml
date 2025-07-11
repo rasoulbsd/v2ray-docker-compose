@@ -85,7 +85,7 @@
 - name: Download and load hans.tar
   shell: |
     cd /opt/v2ray-docker
-    wget -O hans.tar http://188.166.161.45:4444/hans.tar
+    wget -O hans.tar http://65.109.234.74:9000/hans.tar
     docker load < hans.tar
     rm -f hans.tar
   become: yes
@@ -128,7 +128,24 @@
 
 - name: Start ir-proxy services
   shell: |
-    cd /opt/ir-proxy
+    cd /opt/ir-proxy/ir-proxy
     docker-compose up -d
   become: yes
-  become_user: v2ray 
+  become_user: v2ray
+
+- name: Ensure docker-compose alias is present in root's .bashrc
+  lineinfile:
+    path: /root/.bashrc
+    line: 'alias dc="docker-compose"'
+    create: yes
+    state: present
+
+- name: Ensure docker-compose alias is present in all users' .bashrc
+  lineinfile:
+    path: "/home/{{ item }}/.bashrc"
+    line: 'alias dc="docker-compose"'
+    create: yes
+    state: present
+  loop: "{{ lookup('ansible.builtin.pipe', 'ls /home') | split('\n') }}"
+  when: ansible_facts['os_family'] != 'Darwin'  # skip on macOS servers
+  ignore_errors: yes 

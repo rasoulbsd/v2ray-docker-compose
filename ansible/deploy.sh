@@ -3,7 +3,15 @@
 # V2Ray Ansible Deployment Script
 # This script runs the Ansible playbook to deploy V2Ray and Hans services
 
-set -e
+# set -e  # Removed to allow non-atomic execution
+
+FAILED_PING_HOSTS=()
+FAILED_PLAYBOOK_HOSTS=()
+
+function parse_failed_hosts() {
+  # $1: file with ansible output
+  grep -E 'UNREACHABLE|FAILED' "$1" | awk -F ' |:' '{print $1}' | sort | uniq
+}
 
 echo "🚀 Starting V2Ray Ansible Deployment..."
 
@@ -33,32 +41,43 @@ fi
 echo "✅ Prerequisites check passed"
 
 # Test connectivity to all hosts
+PING_LOG=$(mktemp)
 echo "🔍 Testing connectivity to VPSs..."
-ansible all -m ping
+ansible all -m ping | tee "$PING_LOG"
 
-if [ $? -eq 0 ]; then
+FAILED_PING_HOSTS=( $(parse_failed_hosts "$PING_LOG") )
+
+if [ ${#FAILED_PING_HOSTS[@]} -eq 0 ]; then
     echo "✅ All VPSs are reachable"
 else
-    echo "❌ Some VPSs are not reachable. Please check your SSH configuration."
-    exit 1
+    echo "⚠️  Some VPSs are not reachable: ${FAILED_PING_HOSTS[*]}"
+    echo "   Will continue with reachable hosts."
 fi
 
 # Run the deployment
+PLAYBOOK_LOG=$(mktemp)
 echo "📦 Starting deployment..."
-ansible-playbook playbook.yml
+ansible-playbook playbook.yml | tee "$PLAYBOOK_LOG"
 
-if [ $? -eq 0 ]; then
+FAILED_PLAYBOOK_HOSTS=( $(parse_failed_hosts "$PLAYBOOK_LOG") )
+
+if [ ${#FAILED_PLAYBOOK_HOSTS[@]} -eq 0 ]; then
     echo ""
-    echo "🎉 Deployment completed successfully!"
-    echo ""
-    echo "📋 Next steps:"
-    echo "   - Check service status: ansible all -m shell -a 'cd /opt/v2ray-docker/upstream && docker-compose ps'"
-    echo "   - View logs: ansible all -m shell -a 'cd /opt/v2ray-docker/upstream && docker-compose logs'"
-    echo "   - Test connectivity to V2Ray ports"
-    echo ""
-    echo "🔧 To manage individual servers:"
-    echo "   - SSH to server and run: cd /opt/v2ray-docker/upstream && docker-compose ps"
+    echo "🎉 Deployment completed successfully on all reachable hosts!"
 else
-    echo "❌ Deployment failed. Please check the error messages above."
-    exit 1
-fi 
+    echo "❌ Deployment failed on the following hosts: ${FAILED_PLAYBOOK_HOSTS[*]}"
+    echo "   You can retry deployment for these hosts by limiting the run, e.g.:"
+    echo "   ansible-playbook playbook.yml -l ${FAILED_PLAYBOOK_HOSTS[*]}"
+fi
+
+echo ""
+echo "📋 Next steps:"
+echo "   - Check service status: ansible all -m shell -a 'cd /opt/v2ray-docker/upstream && docker-compose ps'"
+echo "   - View logs: ansible all -m shell -a 'cd /opt/v2ray-docker/upstream && docker-compose logs'"
+echo "   - Test connectivity to V2Ray ports"
+echo ""
+echo "🔧 To manage individual servers:"
+echo "   - SSH to server and run: cd /opt/v2ray-docker/upstream && docker-compose ps"
+
+# Clean up temp files
+rm -f "$PING_LOG" "$PLAYBOOK_LOG" 

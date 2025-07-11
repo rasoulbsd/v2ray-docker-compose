@@ -2,14 +2,114 @@ all:
   children:
     v2ray_servers:
       hosts:
-        vps1:
-          ansible_host: <VPS_IP>
+        # Digital Ocean
+        do1:
+          ansible_host: 161.35.170.255
           ansible_user: root
-          ansible_ssh_private_key_file: <PATH-TO-YOUR-SSH_KEY>
+          ansible_ssh_private_key_file: ~/.ssh/vpn
+        do2:
+          ansible_host: 178.128.243.105
+          ansible_user: root
+          ansible_ssh_private_key_file: ~/.ssh/vpn
+        do3:
+          ansible_host: 104.248.84.115
+          ansible_user: root
+          ansible_ssh_private_key_file: ~/.ssh/vpn
+        do4:
+          ansible_host: 107.170.1.89
+          ansible_user: root
+          ansible_ssh_private_key_file: ~/.ssh/vpn
+        do5:
+          ansible_host: 162.243.232.115
+          ansible_user: root
+          ansible_ssh_private_key_file: ~/.ssh/vpn
+        do6:
+          ansible_host: 159.65.95.121
+          ansible_user: root
+          ansible_ssh_private_key_file: ~/.ssh/vpn
+        do7:
+          ansible_host: 134.209.16.238
+          ansible_user: root
+          ansible_ssh_private_key_file: ~/.ssh/vpn
+        do8:
+          ansible_host: 165.232.34.133
+          ansible_user: root
+          ansible_ssh_private_key_file: ~/.ssh/vpn
+        do9:
+          ansible_host: 164.92.195.80
+          ansible_user: root
+          ansible_ssh_private_key_file: ~/.ssh/vpn
+        # Linode
+        linode1:
+          ansible_host: 85.90.244.219
+          ansible_user: root
+          ansible_ssh_private_key_file: ~/.ssh/vpn
+        linode2:
+          ansible_host: 172.232.221.195
+          ansible_user: root
+          ansible_ssh_private_key_file: ~/.ssh/vpn
+        linode3:
+          ansible_host: 172.105.170.138
+          ansible_user: root
+          ansible_ssh_private_key_file: ~/.ssh/vpn
+        linode4:
+          ansible_host: 172.233.24.197
+          ansible_user: root
+          ansible_ssh_private_key_file: ~/.ssh/vpn
+        linode5:
+          ansible_host: 172.105.26.38
+          ansible_user: root
+          ansible_ssh_private_key_file: ~/.ssh/vpn
+        linode6:
+          ansible_host: 172.233.110.238
+          ansible_user: root
+          ansible_ssh_private_key_file: ~/.ssh/vpn
+        linode7:
+          ansible_host: 172.233.249.210
+          ansible_user: root
+          ansible_ssh_private_key_file: ~/.ssh/vpn
+        linode8:
+          ansible_host: 172.232.146.126
+          ansible_user: root
+          ansible_ssh_private_key_file: ~/.ssh/vpn
+        linode9:
+          ansible_host: 139.177.202.36
+          ansible_user: root
+          ansible_ssh_private_key_file: ~/.ssh/vpn
+        # IBM
+        ibm1:
+          ansible_host: 158.175.78.132
+          ansible_user: root
+          ansible_ssh_private_key_file: ~/.ssh/vpn
+        ibm2:
+          ansible_host: 169.50.142.70
+          ansible_user: root
+          ansible_ssh_private_key_file: ~/.ssh/vpn
+        ibm3:
+          ansible_host: 169.51.2.132
+          ansible_user: root
+          ansible_ssh_private_key_file: ~/.ssh/vpn
+        ibm4:
+          ansible_host: 161.156.104.104
+          ansible_user: root
+          ansible_ssh_private_key_file: ~/.ssh/vpn
+        # Hetzner
+        hetzner1:
+          ansible_host: 65.109.234.74
+          ansible_user: root
+          ansible_ssh_private_key_file: ~/.ssh/vpn
+        hetzner2:
+          ansible_host: 188.245.63.74
+          ansible_user: root
+          ansible_ssh_private_key_file: ~/.ssh/vpn
+        hetzner3:
+          ansible_host: 128.140.83.6
+          ansible_user: root
+          ansible_ssh_private_key_file: ~/.ssh/vpn
       vars:
         # Common variables for all V2Ray servers
-        v2ray_port: <PORT>
-        v2ray_uuid: <UPSTREAM-UUID>
-        hans_password: <HANS-PASSWORD>
+        v2ray_port: 1310
+        v2ray_uuid: "dc73d08a-ca51-434d-b47b-361f23879f70"
+        hans_password: "773ee1c2870e0454a52bfba61c1bc34c"
         hans_subnet: "10.71.71.0"
         hans_mtu: 1450 
