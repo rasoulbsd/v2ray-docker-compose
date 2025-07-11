@@ -1,5 +1,16 @@
 version: '3.8'
 services:
+  # v2ray:
+  #     image: ghcr.io/v2fly/v2ray:v5.14.1-64-std
+  #     container_name: ir-proxy-upstream
+  #     restart: always
+  #     environment:
+  #       - v2ray.vmess.aead.forced=false
+  #     ports:
+  #       - "2310:2310"
+  #     volumes:
+  #       - ./ir-proxy/v2ray/config/:/etc/v2ray/
+  #       - ./ir-proxy/logs:/var/log/v2ray/
   nginx:
     image: nginx:1.27.5
     volumes:
