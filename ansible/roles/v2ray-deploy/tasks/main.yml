@@ -149,3 +149,12 @@
   loop: "{{ lookup('ansible.builtin.pipe', 'ls /home') | split('\n') }}"
   when: ansible_facts['os_family'] != 'Darwin'  # skip on macOS servers
   ignore_errors: yes 
+
+- name: Ensure V2Ray docker-compose restart cronjob exists
+  cron:
+    name: "Restart V2Ray docker-compose every 4 hours"
+    user: v2ray
+    job: "cd /opt/v2ray-docker/upstream && docker-compose down && docker-compose up -d --build"
+    minute: 0
+    hour: '*/4'
+    state: present 
